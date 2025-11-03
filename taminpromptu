@@ -1,0 +1,320 @@
+bana bir next js uygulamasi olustur. bu uygulamada ben api yi kullanacagim yogunlukla, 
+otel fiyatlarini anlik olarak cekecegim. fiyati cekecegim api endpointi su: https://halalbooking.com/api/v2/tr/places/227/?groups[]=2&location=Turkey&page=1&currency=TRY&checkin=2025-10-24&checkout=2025-10-26
+otel adini, indirim oranini, cocuk ve yetiskin sayilarini ve cocuk yaslarini verdigim taktirde fiyatlarini indirim oranini uygulayarak fiyatlari oda tipi ile beraber verecek.
+bu bilgileri hem api olarak girebilecegim bir endpoint olustur. hem de bir sayfada bana bir form ver ve form submit olunca enpointe istek atip o sayfada gerekli bilgileri gösterecek, bu sayfa client side olacak.
+her otelin bir id si var, ben otel ve id eslemesini gerekli kismda ekleyecegim, mesela 227 idli otelin adi wome deluxe olacak.
+
+Orner response: 
+{
+    "currency": "TRY",
+    "url": "https://halalbooking.com/tr/p/227?checkin=2025-10-24&checkout=2025-10-26&currency=TRY&groups%5B%5D=2",
+    "locale": "tr",
+    "place": {
+        "id": 227,
+        "name": "Wome Deluxe",
+        "stars": 5,
+        "overview": "Gür ağaçlarla çevrili bir ormanın ortasında, ailelere ve kadınlara özel korunaklı plaj alanları sunan lüks bir tatil köyü. Alkolsüz bu huzur dolu tesiste 10 yüzme havuzu, erkeklere özel ve kadınlar özel spa merkezleri bulunmaktadır. Kadınlara özel ve erkeklere özel açık havuzlar düşük sezonda ısıtılmaktadır.",
+        "facts": "Tesis tipi: Tatil köyü\nYıldız sayısı: 5\nGiriş: 14:00'dan sonra\nÇıkış: 11:00'dan önce\nKonuşulan di̇ller: İngilizce, Türkçe, Fransızca\nKonum: İncekum Tabiat Parkı No: 2, Avsallar, Alanya, Antalya (il), 07400, Türkiye\n",
+        "facilities": "GENEL TESİS OLANAKLARI: Plaja sıfır, Bahçe, Güneşlenme terası, Klima, Isıtma, Ortak salon/TV alanı, Engelli misafirler için olanaklar, Asansör, Sigara içilmeyen odalar, Balayı suiti, Cabana, Mescit - genel, Abdesthane\n\nETKİNLİKLER: Baketbol sahası, Futbol sahası, Voleybol sahası, Aerobik, Aqua aerobik, Bovling, Bilardo, Masa tenisi\n\nYİYECEK & İÇECEK: Restoran, Restoran (alakart), Snack bar, Pastane, Oda servisi\n\nÇOCUKLAR İÇİN: Çocuk kulübü, Çocuk oyun alanı, Oyun salonu, İç mekan oyun merkezi, Çocuk tiyatrosu, Çocuk animasyon programları, Çocuklar için akşam eğlencesi, Çocuk havuzu, Su kaydırağı, Çocuk oyun odası, Bebek bakımı/çocuk hizmetleri\n\nEĞLENCELER: Sinema, Tiyatro, Canlı müzik, Akşam eğlencesi, Sadece bayanlara özel disco\n\nİNTERNET: Wi-Fi\n\nPARK YERİ: Tesis bünyesinde (Ücretsiz)\n\nDÜKKANLAR: Tesis bünyesinde mini market, Tesis bünyesinde mağazalar, Kuaför/güzellik salonu, Berber\n\nMİSAFİR HİZMETLERİ: 24-saat açık resepsiyon, Konsiyerj hizmeti, Bagaj muhafazası, Tur masası\n\nÇALIŞMA ALANLARI: Konferans salonu, Toplantı odası, Ziyafet imkanları\n\nTEMİZLİK HİZMETLERİ: Çamaşırhane (ücretli), Kuru temizleme (ücretli), Günlük temizlik hizmeti\n\nULAŞIM: Havaalanı özel transfer (ücretli), Havaalanı ring servisi (ücretli), Araba kiralama (ücretli)\n\nPLAJLAR: 09 Nis - 20 Kas\nPlaj: Bayanlara özel, Erkeklere özel, Karışık kullanım\nPlaj güneşlenme alanı: Bayanlara özel, Erkeklere özel, Karışık kullanım\nTesisler: Cabana, Kafe, Giyinme odaları, Duş\n\nOlanaklar: Güneşlikler, Şezlonglar, Plaj havluları\n\nSAĞLIK & SPA:\nSağlık & Spa  1: Sağlık tesisleri: Spa merkezi, Türk hamamı, Sauna, Buhar banyosu, Masaj, Tuz odası, Fitness\nSağlık & Spa  2: Sağlık tesisleri: Spa merkezi, Türk hamamı, Sauna, Buhar banyosu, Masaj, Tuz odası, Fitness\n\nHAVUZLAR:\nWome Deluxe'de 10 havuz bulunmaktadır.\n\nHavuz 1: Açık havuz, 735 m²\nOlanaklar: Havuz kenarı aperatifler, Şezlonglar, Güneşlikler\n\nSıcaklık kontrolü: Soğuk havalarda ısıtmalı\nHavuz 2: Kapalı havuz, 275 m²\nSıcaklık kontrolü: Soğuk havalarda ısıtmalı\n\nOlanaklar: Bitişik çocuk havuzu\nHavuz 3: Açık havuz, 530 m²\nOlanaklar: Şezlonglar, Güneşlikler\nHavuz 4: Açık havuz, 650 m²\nOlanaklar: Su kaydırağı, Bitişik çocuk havuzu, Güneşlikler, Şezlonglar\n\nSıcaklık kontrolü: Soğuk havalarda ısıtmalı\nHavuz 5: Kapalı havuz, 275 m²\nSıcaklık kontrolü: Soğuk havalarda ısıtmalı\n\nOlanaklar: Bitişik çocuk havuzu\nHavuz 6: Açık havuz, 120 m²\nOlanaklar: Çocuk su kaydırağı, Bebek su kaydırağı\n\nSıcaklık kontrolü: Soğuk havalarda ısıtmalı\nHavuz 7: Açık havuz, 100 m²\nOlanaklar: Su kaydırağı\nHavuz 8: Açık havuz, 100 m²\nOlanaklar: Su kaydırağı\nHavuz 9: Açık havuz, 40 m²\nOlanaklar: Çocuk su kaydırağı, Bebek su kaydırağı\nHavuz 10: Açık havuz, 65 m²\nOlanaklar: Çocuk su kaydırağı, Şezlonglar\n\nSıcaklık kontrolü: Soğuk havalarda ısıtmalı\n\nÖNEMLİ NOTLAR VE KURALLAR: Restoran ve lobi gibi alanlar başta olmak üzere tesisin ortak kullanılan alanlarında kadın misafirlerin en az kısa kollu ve diz hizasında kıyafet giymeleri gerekmektedir. Tesisin sahip olduğu konsepte aykırı kıyafetler kabul edilmemektedir.\n\nTesiste 5 yaş altı çocukların yetişkin havuzlarını kullanmaları için bez mayo giydirilmesi gerekmektedir.\n\nBazı açık hava tesisleri yalnızca yaz sezonunda hizmet vermektedir. Hava şartlarına bağlı olarak müsait olma tarihleri 7-15 gün arasında (erken veya geç) değişebilir.\n\n6 yaş ve üzeri erkek çocukların kadınlara özel tesis olanaklarını kullanmalarına izin verilmemektedir. Erkeklere özel tesislere 6 yaş ve üzeri kız çocukları kabul edilmemektedir.\n\nEvcil hayvan tesise kabul edilmemektedir.\n\nGeç çıkış durumunda, çıkış 14:00 - 18:00 saatleri arasında yapılırsa günlük ücretin %50'si, 21:00'den sonra yapılırsa günlük ücretin tamamı ek ücret olarak talep edilebilir. \n\nZorunlu hallerde, sadece Türkiye'ye seyahat kısıtlaması olması ve otelin hizmet verememesi durumunda para iadesi yapılacaktır. Diğer durumlarda normal iptal politikası geçerli olacaktır.\n\nMisafir şikayetleri durumunda, misafirlerin konaklamaları sırasında resepsiyona başvurmaları gerekmektedir ve otel, çıkış yapıldıktan sonra resmi şikayetleri kabul etmeyecektir.\n\nBu aile oteli tek kişilik veya tamamı erkeklerden oluşan grup rezervasyonlarını kabul etmemektedir.   \n\nOtelde Ramazan ayı boyunca Her Şey Dahil veya Yarım Pansiyon (Sahur ve İftar) seçenekleri sunulmaktadır.\n\nGeç çıkış ve erken giriş HBLC ayrıcalıkları için, müsaitlik durumuna bağlı olarak 14:30'a kadar geç çıkış ve 11:00'den itibaren erken giriş yapılabilir .\n\n",
+        "board_basis": "",
+        "rate_plan": "",
+        "cancellation_policy": {
+            "id": 0,
+            "html": ""
+        },
+        "holiday_type": "resort",
+        "location": {
+            "country_code": "",
+            "name": "Avsallar",
+            "locality": "Avsallar",
+            "city": "Alanya",
+            "subregion": "Antalya",
+            "region": "Akdeniz",
+            "country": "Türkiye"
+        },
+        "photo": "https://cdn.halalstatic.com/2025%2F04%2F17%2F11%2F18%2F34%2Fc382d540-9216-40bf-8b17-1982f0e0b0cf%2F152_VuxM6xSbMx9jXyd58Cj7oA.jpg?fit=bounds&format=jpg&width=1600",
+        "photos": [],
+        "checkin_time": "14:00",
+        "checkout_time": "11:00"
+    },
+    "groups": [
+        {
+            "group": "2",
+            "offers": [
+                {
+                    "price": 24423,
+                    "total_price": 24423,
+                    "base_rate": 10903,
+                    "tax_rate": 1308,
+                    "fees": [],
+                    "quantity": 1,
+                    "affiliate_commission_percentage": "12,000",
+                    "confirmation": "instant",
+                    "room": {
+                        "id": 808,
+                        "name": "Superior Oda",
+                        "photos": [],
+                        "long_description": "ODA TÜRÜ ADI: Superior Oda\nODA TÜRÜ BÜYÜKLÜĞÜ: 35 m²\n\nVarsayılan misafir sayısı: 2 kişi\nMaks. kapasite (ek yatak ve yatak paylaşımı dahil): 2 yetişkin, 1 bebek (<4y)\nAlanlar ve yatak düzeni seçenekleri:\n  Yatak odası: 1 × Çift kişilik (1 × Bebek yatağı eklenebilir)\n  Banyo\n\nDİĞER ODA OLANAKLARI: Balkon, Orman manzarası, Klima, Emanet kasası, Çalışma masası, Gardırop/Dolap, Kıyafet askılığı, Ahşap/Parke zemin, Tavandan tabana pencereler, Karartma perdeler, Kuran, Seccade, Kıble pusulası, Duş, Saç kurutma makinesi, Terlik, Ücretsiz banyo malzemeleri, Taharet musluğu, Tuvalet kağıdı, Tuvalet, Wi-Fi, Düz ekran TV, Uydu kanalları, Telefon, Minibar, Çay/Kahve seti, Elektrikli su ısıtıcı, Havlular\n"
+                    },
+                    "rate_plan": {
+                        "id": 242,
+                        "meal_plan_name": "Her şey dahil",
+                        "cancellation_policy_label": "Kısmen iade edilebilir",
+                        "cancellation_policy_html": "<ul><li>Giriş tarihinden 30 gün öncesine kadar yapılan değişiklik veya iptallerde, hiçbir kesinti yapılmaz.</li><li>Giriş tarihinden 15 gün öncesine kadar yapılan değişiklik veya iptallerde, toplam ücretten %40 kesinti yapılır.</li><li>Giriş tarihinden 7 gün öncesine kadar yapılan değişiklik veya iptallerde, toplam ücretten %50 kesinti yapılır.</li><li>Giriş tarihinden 6 gün öncesine kadar yapılan değişiklik veya iptallerde, toplam ücretten %100 kesinti yapılır.</li><li>Daha sonra yapılan iptal veya değişikliklerde, toplam ücretten %100 kesinti yapılır.</li></ul>"
+                    },
+                    "rate_plans": [
+                        {
+                            "price": 24423,
+                            "total_price": 24423,
+                            "base_rate": 10903,
+                            "tax_rate": 1308,
+                            "fees": [],
+                            "quantity": 1,
+                            "affiliate_commission_percentage": "12,000",
+                            "rate_plan": {
+                                "id": 242,
+                                "meal_plan_name": "Her şey dahil",
+                                "cancellation_policy_label": "Kısmen iade edilebilir",
+                                "cancellation_policy_html": "<ul><li>Giriş tarihinden 30 gün öncesine kadar yapılan değişiklik veya iptallerde, hiçbir kesinti yapılmaz.</li><li>Giriş tarihinden 15 gün öncesine kadar yapılan değişiklik veya iptallerde, toplam ücretten %40 kesinti yapılır.</li><li>Giriş tarihinden 7 gün öncesine kadar yapılan değişiklik veya iptallerde, toplam ücretten %50 kesinti yapılır.</li><li>Giriş tarihinden 6 gün öncesine kadar yapılan değişiklik veya iptallerde, toplam ücretten %100 kesinti yapılır.</li><li>Daha sonra yapılan iptal veya değişikliklerde, toplam ücretten %100 kesinti yapılır.</li></ul>"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "price": 26546,
+                    "total_price": 26546,
+                    "base_rate": 11851,
+                    "tax_rate": 1422,
+                    "fees": [],
+                    "quantity": 1,
+                    "affiliate_commission_percentage": "12,000",
+                    "confirmation": "instant",
+                    "room": {
+                        "id": 1328,
+                        "name": "Premium Oda (Deniz manzaralı)",
+                        "photos": [],
+                        "long_description": "ODA TÜRÜ ADI: Premium Oda (Deniz manzaralı)\nODA TÜRÜ BÜYÜKLÜĞÜ: 35 m²\n\nVarsayılan misafir sayısı: 2 kişi\nMaks. kapasite (ek yatak ve yatak paylaşımı dahil): 2 yetişkin, 1 bebek (<4y)\nAlanlar ve yatak düzeni seçenekleri:\n  Yatak odası: 1 × Çift kişilik (1 × Bebek yatağı eklenebilir)\n  Banyo\n\nDİĞER ODA OLANAKLARI: Balkon, Deniz manzarası, Klima, Emanet kasası, Çalışma masası, Gardırop/Dolap, Kıyafet askılığı, Ahşap/Parke zemin, Tavandan tabana pencereler, Karartma perdeler, Kuran, Seccade, Kıble pusulası, Duş, Saç kurutma makinesi, Terlik, Ücretsiz banyo malzemeleri, Taharet musluğu, Tuvalet kağıdı, Tuvalet, Wi-Fi, Düz ekran TV, Uydu kanalları, Telefon, Minibar, Çay/Kahve seti, Elektrikli su ısıtıcı, Havlular\n"
+                    },
+                    "rate_plan": {
+                        "id": 242,
+                        "meal_plan_name": "Her şey dahil",
+                        "cancellation_policy_label": "Kısmen iade edilebilir",
+                        "cancellation_policy_html": "<ul><li>Giriş tarihinden 30 gün öncesine kadar yapılan değişiklik veya iptallerde, hiçbir kesinti yapılmaz.</li><li>Giriş tarihinden 15 gün öncesine kadar yapılan değişiklik veya iptallerde, toplam ücretten %40 kesinti yapılır.</li><li>Giriş tarihinden 7 gün öncesine kadar yapılan değişiklik veya iptallerde, toplam ücretten %50 kesinti yapılır.</li><li>Giriş tarihinden 6 gün öncesine kadar yapılan değişiklik veya iptallerde, toplam ücretten %100 kesinti yapılır.</li><li>Daha sonra yapılan iptal veya değişikliklerde, toplam ücretten %100 kesinti yapılır.</li></ul>"
+                    },
+                    "rate_plans": [
+                        {
+                            "price": 26546,
+                            "total_price": 26546,
+                            "base_rate": 11851,
+                            "tax_rate": 1422,
+                            "fees": [],
+                            "quantity": 1,
+                            "affiliate_commission_percentage": "12,000",
+                            "rate_plan": {
+                                "id": 242,
+                                "meal_plan_name": "Her şey dahil",
+                                "cancellation_policy_label": "Kısmen iade edilebilir",
+                                "cancellation_policy_html": "<ul><li>Giriş tarihinden 30 gün öncesine kadar yapılan değişiklik veya iptallerde, hiçbir kesinti yapılmaz.</li><li>Giriş tarihinden 15 gün öncesine kadar yapılan değişiklik veya iptallerde, toplam ücretten %40 kesinti yapılır.</li><li>Giriş tarihinden 7 gün öncesine kadar yapılan değişiklik veya iptallerde, toplam ücretten %50 kesinti yapılır.</li><li>Giriş tarihinden 6 gün öncesine kadar yapılan değişiklik veya iptallerde, toplam ücretten %100 kesinti yapılır.</li><li>Daha sonra yapılan iptal veya değişikliklerde, toplam ücretten %100 kesinti yapılır.</li></ul>"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "price": 26901,
+                    "total_price": 26901,
+                    "base_rate": 12009,
+                    "tax_rate": 1441,
+                    "fees": [],
+                    "quantity": 1,
+                    "affiliate_commission_percentage": "12,000",
+                    "confirmation": "instant",
+                    "room": {
+                        "id": 1326,
+                        "name": "Aile Odası (Deniz manzaralı)",
+                        "photos": [],
+                        "long_description": "ODA TÜRÜ ADI: Aile Odası (Deniz manzaralı)\nODA TÜRÜ BÜYÜKLÜĞÜ: 45 m²\n\nVarsayılan misafir sayısı: 4 kişi\nMaks. kapasite (ek yatak ve yatak paylaşımı dahil): 3 yetişkin, 1 çocuk (<12y), 1 bebek (<4y)\nAlanlar ve yatak düzeni seçenekleri:\n  Yatak odası 1: 1 × Çift kişilik (1 × Bebek yatağı eklenebilir)\n  Yatak odası 2: 1 × Tek kişilik ve 1 × Açılabilir koltuk\n  Banyo\n\nDİĞER ODA OLANAKLARI: Balkon, Deniz manzarası, Klima, Emanet kasası, Çalışma masası, Gardırop/Dolap, Kıyafet askılığı, Ahşap/Parke zemin, Tavandan tabana pencereler, Karartma perdeler, Kuran, Seccade, Kıble pusulası, Duş, Saç kurutma makinesi, Terlik, Ücretsiz banyo malzemeleri, Taharet musluğu, Tuvalet kağıdı, Tuvalet, Wi-Fi, Düz ekran TV, Uydu kanalları, Telefon, Minibar, Çay/Kahve seti, Elektrikli su ısıtıcı, Havlular\n"
+                    },
+                    "rate_plan": {
+                        "id": 242,
+                        "meal_plan_name": "Her şey dahil",
+                        "cancellation_policy_label": "Kısmen iade edilebilir",
+                        "cancellation_policy_html": "<ul><li>Giriş tarihinden 30 gün öncesine kadar yapılan değişiklik veya iptallerde, hiçbir kesinti yapılmaz.</li><li>Giriş tarihinden 15 gün öncesine kadar yapılan değişiklik veya iptallerde, toplam ücretten %40 kesinti yapılır.</li><li>Giriş tarihinden 7 gün öncesine kadar yapılan değişiklik veya iptallerde, toplam ücretten %50 kesinti yapılır.</li><li>Giriş tarihinden 6 gün öncesine kadar yapılan değişiklik veya iptallerde, toplam ücretten %100 kesinti yapılır.</li><li>Daha sonra yapılan iptal veya değişikliklerde, toplam ücretten %100 kesinti yapılır.</li></ul>"
+                    },
+                    "rate_plans": [
+                        {
+                            "price": 26901,
+                            "total_price": 26901,
+                            "base_rate": 12009,
+                            "tax_rate": 1441,
+                            "fees": [],
+                            "quantity": 1,
+                            "affiliate_commission_percentage": "12,000",
+                            "rate_plan": {
+                                "id": 242,
+                                "meal_plan_name": "Her şey dahil",
+                                "cancellation_policy_label": "Kısmen iade edilebilir",
+                                "cancellation_policy_html": "<ul><li>Giriş tarihinden 30 gün öncesine kadar yapılan değişiklik veya iptallerde, hiçbir kesinti yapılmaz.</li><li>Giriş tarihinden 15 gün öncesine kadar yapılan değişiklik veya iptallerde, toplam ücretten %40 kesinti yapılır.</li><li>Giriş tarihinden 7 gün öncesine kadar yapılan değişiklik veya iptallerde, toplam ücretten %50 kesinti yapılır.</li><li>Giriş tarihinden 6 gün öncesine kadar yapılan değişiklik veya iptallerde, toplam ücretten %100 kesinti yapılır.</li><li>Daha sonra yapılan iptal veya değişikliklerde, toplam ücretten %100 kesinti yapılır.</li></ul>"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "price": 47077,
+                    "total_price": 47077,
+                    "base_rate": 12009,
+                    "tax_rate": 1441,
+                    "fees": [],
+                    "quantity": 1,
+                    "affiliate_commission_percentage": "12,000",
+                    "confirmation": "instant",
+                    "room": {
+                        "id": 1327,
+                        "name": "Aile Süit (Deniz manzaralı)",
+                        "photos": [],
+                        "long_description": "ODA TÜRÜ ADI: Aile Süit (Deniz manzaralı)\nODA TÜRÜ BÜYÜKLÜĞÜ: 70 m²\n\nVarsayılan misafir sayısı: 4 kişi\nMaks. kapasite (ek yatak ve yatak paylaşımı dahil): 4 yetişkin, 1 çocuk (<12y), 1 bebek (<4y)\nAlanlar ve yatak düzeni seçenekleri:\n  Yatak odası 1: 1 × Çift kişilik (1 × Ekstra yatak eklenebilir)\n  Yatak odası 2: 2 × Tek kişilik (1 × Bebek yatağı eklenebilir)\n  Banyo\n\nDİĞER ODA OLANAKLARI: Balkon, Deniz manzarası, Klima, Emanet kasası, Çalışma masası, Gardırop/Dolap, Kıyafet askılığı, Ahşap/Parke zemin, Tavandan tabana pencereler, Karartma perdeler, Kuran, Seccade, Kıble pusulası, Duş, Saç kurutma makinesi, Terlik, Ücretsiz banyo malzemeleri, Taharet musluğu, Tuvalet kağıdı, Tuvalet, Wi-Fi, Düz ekran TV, Uydu kanalları, Telefon, Minibar, Çay/Kahve seti, Elektrikli su ısıtıcı, Havlular\n"
+                    },
+                    "rate_plan": {
+                        "id": 242,
+                        "meal_plan_name": "Her şey dahil",
+                        "cancellation_policy_label": "Kısmen iade edilebilir",
+                        "cancellation_policy_html": "<ul><li>Giriş tarihinden 30 gün öncesine kadar yapılan değişiklik veya iptallerde, hiçbir kesinti yapılmaz.</li><li>Giriş tarihinden 15 gün öncesine kadar yapılan değişiklik veya iptallerde, toplam ücretten %40 kesinti yapılır.</li><li>Giriş tarihinden 7 gün öncesine kadar yapılan değişiklik veya iptallerde, toplam ücretten %50 kesinti yapılır.</li><li>Giriş tarihinden 6 gün öncesine kadar yapılan değişiklik veya iptallerde, toplam ücretten %100 kesinti yapılır.</li><li>Daha sonra yapılan iptal veya değişikliklerde, toplam ücretten %100 kesinti yapılır.</li></ul>"
+                    },
+                    "rate_plans": [
+                        {
+                            "price": 47077,
+                            "total_price": 47077,
+                            "base_rate": 12009,
+                            "tax_rate": 1441,
+                            "fees": [],
+                            "quantity": 1,
+                            "affiliate_commission_percentage": "12,000",
+                            "rate_plan": {
+                                "id": 242,
+                                "meal_plan_name": "Her şey dahil",
+                                "cancellation_policy_label": "Kısmen iade edilebilir",
+                                "cancellation_policy_html": "<ul><li>Giriş tarihinden 30 gün öncesine kadar yapılan değişiklik veya iptallerde, hiçbir kesinti yapılmaz.</li><li>Giriş tarihinden 15 gün öncesine kadar yapılan değişiklik veya iptallerde, toplam ücretten %40 kesinti yapılır.</li><li>Giriş tarihinden 7 gün öncesine kadar yapılan değişiklik veya iptallerde, toplam ücretten %50 kesinti yapılır.</li><li>Giriş tarihinden 6 gün öncesine kadar yapılan değişiklik veya iptallerde, toplam ücretten %100 kesinti yapılır.</li><li>Daha sonra yapılan iptal veya değişikliklerde, toplam ücretten %100 kesinti yapılır.</li></ul>"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "price": 66367,
+                    "total_price": 66367,
+                    "base_rate": 11851,
+                    "tax_rate": 1422,
+                    "fees": [],
+                    "quantity": 1,
+                    "affiliate_commission_percentage": "12,000",
+                    "confirmation": "instant",
+                    "room": {
+                        "id": 811,
+                        "name": "Delüks Süit (Orman manzaralı)",
+                        "photos": [],
+                        "long_description": "ODA TÜRÜ ADI: Delüks Süit (Orman manzaralı)\nODA TÜRÜ BÜYÜKLÜĞÜ: 125 m²\n\nVarsayılan misafir sayısı: 5 kişi\nMaks. kapasite (ek yatak ve yatak paylaşımı dahil): 5 yetişkin, 1 çocuk (<12y), 1 bebek (<4y)\nAlanlar ve yatak düzeni seçenekleri:\n  Yatak odası 1: (ebeveyn banyolu 1)1 × En büyük (King) boy (1 × Bebek yatağı eklenebilir)\n  Yatak odası 2: (ebeveyn banyolu 2)2 × Tek kişilik\n  Oturma odası: 1 × Çekyat (1 × Ekstra yatak eklenebilir)\n\nDİĞER ODA OLANAKLARI: Korunaklı spa küveti/jakuzi, Balkon, Orman manzarası, Klima, Emanet kasası, Oturma alanı, Çalışma masası, Gardırop/Dolap, Kıyafet askılığı, Ahşap/Parke zemin, Halı zemin, Tavandan tabana pencereler, Karartma perdeler, Kuran, Seccade, Kıble pusulası, Küvet, Saç kurutma makinesi, Terlik, Ücretsiz banyo malzemeleri, Taharet musluğu, Tuvalet kağıdı, Tuvalet, Wi-Fi, Düz ekran TV, Uydu kanalları, Telefon, Minibar, Çay/Kahve seti, Elektrikli su ısıtıcı, Yemek alanı, Yemek masası, Havlular\n"
+                    },
+                    "rate_plan": {
+                        "id": 242,
+                        "meal_plan_name": "Her şey dahil",
+                        "cancellation_policy_label": "Kısmen iade edilebilir",
+                        "cancellation_policy_html": "<ul><li>Giriş tarihinden 30 gün öncesine kadar yapılan değişiklik veya iptallerde, hiçbir kesinti yapılmaz.</li><li>Giriş tarihinden 15 gün öncesine kadar yapılan değişiklik veya iptallerde, toplam ücretten %40 kesinti yapılır.</li><li>Giriş tarihinden 7 gün öncesine kadar yapılan değişiklik veya iptallerde, toplam ücretten %50 kesinti yapılır.</li><li>Giriş tarihinden 6 gün öncesine kadar yapılan değişiklik veya iptallerde, toplam ücretten %100 kesinti yapılır.</li><li>Daha sonra yapılan iptal veya değişikliklerde, toplam ücretten %100 kesinti yapılır.</li></ul>"
+                    },
+                    "rate_plans": [
+                        {
+                            "price": 66367,
+                            "total_price": 66367,
+                            "base_rate": 11851,
+                            "tax_rate": 1422,
+                            "fees": [],
+                            "quantity": 1,
+                            "affiliate_commission_percentage": "12,000",
+                            "rate_plan": {
+                                "id": 242,
+                                "meal_plan_name": "Her şey dahil",
+                                "cancellation_policy_label": "Kısmen iade edilebilir",
+                                "cancellation_policy_html": "<ul><li>Giriş tarihinden 30 gün öncesine kadar yapılan değişiklik veya iptallerde, hiçbir kesinti yapılmaz.</li><li>Giriş tarihinden 15 gün öncesine kadar yapılan değişiklik veya iptallerde, toplam ücretten %40 kesinti yapılır.</li><li>Giriş tarihinden 7 gün öncesine kadar yapılan değişiklik veya iptallerde, toplam ücretten %50 kesinti yapılır.</li><li>Giriş tarihinden 6 gün öncesine kadar yapılan değişiklik veya iptallerde, toplam ücretten %100 kesinti yapılır.</li><li>Daha sonra yapılan iptal veya değişikliklerde, toplam ücretten %100 kesinti yapılır.</li></ul>"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "price": 67252,
+                    "total_price": 67252,
+                    "base_rate": 12009,
+                    "tax_rate": 1441,
+                    "fees": [],
+                    "quantity": 1,
+                    "affiliate_commission_percentage": "12,000",
+                    "confirmation": "instant",
+                    "room": {
+                        "id": 1329,
+                        "name": "King Süit (Deniz manzaralı)",
+                        "photos": [],
+                        "long_description": "ODA TÜRÜ ADI: King Süit (Deniz manzaralı)\nODA TÜRÜ BÜYÜKLÜĞÜ: 125 m²\n\nVarsayılan misafir sayısı: 5 kişi\nMaks. kapasite (ek yatak ve yatak paylaşımı dahil): 5 yetişkin, 1 çocuk (<12y), 2 bebek (<4y)\nAlanlar ve yatak düzeni seçenekleri:\n  Yatak odası 1: (ebeveyn banyolu 1)1 × En büyük (King) boy (1 × Bebek yatağı eklenebilir)\n  Yatak odası 2: (ebeveyn banyolu 2)2 × Tek kişilik (1 × Bebek yatağı eklenebilir)\n  Oturma odası: 1 × Çekyat (1 × Ekstra yatak eklenebilir)\n\nDİĞER ODA OLANAKLARI: Korunaklı spa küveti/jakuzi, Balkon, Deniz manzarası, Klima, Emanet kasası, Oturma alanı, Çalışma masası, Gardırop/Dolap, Kıyafet askılığı, Ahşap/Parke zemin, Halı zemin, Tavandan tabana pencereler, Karartma perdeler, Kuran, Seccade, Kıble pusulası, Küvet, Saç kurutma makinesi, Terlik, Ücretsiz banyo malzemeleri, Taharet musluğu, Tuvalet kağıdı, Tuvalet, Wi-Fi, Düz ekran TV, Uydu kanalları, Telefon, Minibar, Çay/Kahve seti, Elektrikli su ısıtıcı, Yemek alanı, Yemek masası, Havlular\n"
+                    },
+                    "rate_plan": {
+                        "id": 242,
+                        "meal_plan_name": "Her şey dahil",
+                        "cancellation_policy_label": "Kısmen iade edilebilir",
+                        "cancellation_policy_html": "<ul><li>Giriş tarihinden 30 gün öncesine kadar yapılan değişiklik veya iptallerde, hiçbir kesinti yapılmaz.</li><li>Giriş tarihinden 15 gün öncesine kadar yapılan değişiklik veya iptallerde, toplam ücretten %40 kesinti yapılır.</li><li>Giriş tarihinden 7 gün öncesine kadar yapılan değişiklik veya iptallerde, toplam ücretten %50 kesinti yapılır.</li><li>Giriş tarihinden 6 gün öncesine kadar yapılan değişiklik veya iptallerde, toplam ücretten %100 kesinti yapılır.</li><li>Daha sonra yapılan iptal veya değişikliklerde, toplam ücretten %100 kesinti yapılır.</li></ul>"
+                    },
+                    "rate_plans": [
+                        {
+                            "price": 67252,
+                            "total_price": 67252,
+                            "base_rate": 12009,
+                            "tax_rate": 1441,
+                            "fees": [],
+                            "quantity": 1,
+                            "affiliate_commission_percentage": "12,000",
+                            "rate_plan": {
+                                "id": 242,
+                                "meal_plan_name": "Her şey dahil",
+                                "cancellation_policy_label": "Kısmen iade edilebilir",
+                                "cancellation_policy_html": "<ul><li>Giriş tarihinden 30 gün öncesine kadar yapılan değişiklik veya iptallerde, hiçbir kesinti yapılmaz.</li><li>Giriş tarihinden 15 gün öncesine kadar yapılan değişiklik veya iptallerde, toplam ücretten %40 kesinti yapılır.</li><li>Giriş tarihinden 7 gün öncesine kadar yapılan değişiklik veya iptallerde, toplam ücretten %50 kesinti yapılır.</li><li>Giriş tarihinden 6 gün öncesine kadar yapılan değişiklik veya iptallerde, toplam ücretten %100 kesinti yapılır.</li><li>Daha sonra yapılan iptal veya değişikliklerde, toplam ücretten %100 kesinti yapılır.</li></ul>"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "price": 220000,
+                    "total_price": 220000,
+                    "base_rate": 196428,
+                    "tax_rate": 23571,
+                    "fees": [],
+                    "quantity": 1,
+                    "affiliate_commission_percentage": "12,000",
+                    "confirmation": "instant",
+                    "room": {
+                        "id": 3816399,
+                        "name": "Sultan Süit",
+                        "photos": [],
+                        "long_description": "ODA TÜRÜ ADI: Sultan Süit\nODA TÜRÜ BÜYÜKLÜĞÜ: 213 m²\n\nVarsayılan misafir sayısı: 4 kişi\nMaks. kapasite (ek yatak ve yatak paylaşımı dahil): 4 yetişkin, 1 çocuk (<12y)\nAlanlar ve yatak düzeni seçenekleri:\n  Yatak odası 1: (ebeveyn banyolu 1)1 × Çift kişilik\n  Yatak odası 2: 2 × Tek kişilik (1 × Ekstra yatak eklenebilir)\n  Banyo 2\n\nDİĞER ODA OLANAKLARI: Balkon, Deniz manzarası, Orman manzarası, Klima, Emanet kasası, Oturma alanı, Çalışma masası, Gardırop/Dolap, Kıyafet askılığı, Ahşap/Parke zemin, Tavandan tabana pencereler, Karartma perdeler, Ortopedik yatak, Kuran, Seccade, Kıble pusulası, Küvet, Saç kurutma makinesi, Terlik, Ücretsiz banyo malzemeleri, Taharet musluğu, Tuvalet kağıdı, Tuvalet, Wi-Fi, Düz ekran TV, Uydu kanalları, Telefon, Minibar, Çay/Kahve seti, Elektrikli su ısıtıcı, Yemek alanı, Yemek masası, Havlular\n"
+                    },
+                    "rate_plan": {
+                        "id": 39203227,
+                        "meal_plan_name": "Her şey dahil",
+                        "cancellation_policy_label": "Kısmen iade edilebilir",
+                        "cancellation_policy_html": "<ul><li>Giriş tarihinden 30 gün öncesine kadar yapılan değişiklik veya iptallerde, hiçbir kesinti yapılmaz.</li><li>Giriş tarihinden 15 gün öncesine kadar yapılan değişiklik veya iptallerde, toplam ücretten %40 kesinti yapılır.</li><li>Giriş tarihinden 7 gün öncesine kadar yapılan değişiklik veya iptallerde, toplam ücretten %50 kesinti yapılır.</li><li>Giriş tarihinden 6 gün öncesine kadar yapılan değişiklik veya iptallerde, toplam ücretten %100 kesinti yapılır.</li><li>Daha sonra yapılan iptal veya değişikliklerde, toplam ücretten %100 kesinti yapılır.</li></ul>"
+                    },
+                    "rate_plans": [
+                        {
+                            "price": 220000,
+                            "total_price": 220000,
+                            "base_rate": 196428,
+                            "tax_rate": 23571,
+                            "fees": [],
+                            "quantity": 1,
+                            "affiliate_commission_percentage": "12,000",
+                            "rate_plan": {
+                                "id": 39203227,
+                                "meal_plan_name": "Her şey dahil",
+                                "cancellation_policy_label": "Kısmen iade edilebilir",
+                                "cancellation_policy_html": "<ul><li>Giriş tarihinden 30 gün öncesine kadar yapılan değişiklik veya iptallerde, hiçbir kesinti yapılmaz.</li><li>Giriş tarihinden 15 gün öncesine kadar yapılan değişiklik veya iptallerde, toplam ücretten %40 kesinti yapılır.</li><li>Giriş tarihinden 7 gün öncesine kadar yapılan değişiklik veya iptallerde, toplam ücretten %50 kesinti yapılır.</li><li>Giriş tarihinden 6 gün öncesine kadar yapılan değişiklik veya iptallerde, toplam ücretten %100 kesinti yapılır.</li><li>Daha sonra yapılan iptal veya değişikliklerde, toplam ücretten %100 kesinti yapılır.</li></ul>"
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
