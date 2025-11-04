@@ -130,7 +130,7 @@ function buildApiUrl(
 ): string {
   const baseUrl = `https://tr.halalbooking.com/api/v2/tr/places/${hotelId}/`;
   const params = new URLSearchParams({
-    'groups[]': JSON.stringify(totalGuests),
+    'groups[]': totalGuests.join(','),
     'location': 'Turkey',
     'customer_country_code': customerCountryCode || 'TR' ,
     'page': '1',
