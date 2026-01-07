@@ -63,7 +63,7 @@ export default async function handler(
     const totalGuests = [adults, ...childrenAges];
     
     // API URL'ini oluştur
-    const apiUrl = buildApiUrl(hotelId, checkin, checkout, totalGuests.filter((age): age is number => age !== null && age !== undefined), currency, customerCountryCode);
+    const apiUrl = buildApiUrl(hotelId, checkin, checkout, totalGuests?.filter((age): age is number => age !== null && age !== undefined), currency, customerCountryCode);
     
     console.log('Fetching from:', apiUrl);
 
@@ -103,7 +103,7 @@ export default async function handler(
         checkout,
         adults,
         children: children || 0,
-        childrenAges: childrenAges.filter((age): age is number => age !== null),
+        childrenAges: childrenAges?.filter((age): age is number => age !== null),
         currency,
         offers: processedOffers,
       }
