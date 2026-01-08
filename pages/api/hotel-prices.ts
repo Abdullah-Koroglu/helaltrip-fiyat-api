@@ -26,16 +26,16 @@ export default async function handler(
       customerCountryCode = 'TR'
     }: HotelSearchRequest = req.body;
 
-    console.log(JSON.stringify({
-      hotelId,
-      checkin,
-      checkout,
-      adults,
-      children,
-      childrenAges,
-      discountPercentage,
-      currency,
-    }, null, 2))
+    // console.log(JSON.stringify({
+    //   hotelId,
+    //   checkin,
+    //   checkout,
+    //   adults,
+    //   children,
+    //   childrenAges,
+    //   discountPercentage,
+    //   currency,
+    // }, null, 2))
 
     // Validasyon
     if (!hotelId || !checkin || !checkout) {
@@ -65,7 +65,7 @@ export default async function handler(
     // API URL'ini oluştur
     const apiUrl = buildApiUrl(hotelId, checkin, checkout, totalGuests?.filter((age): age is number => age !== null && age !== undefined), currency, customerCountryCode);
     
-    console.log('Fetching from:', apiUrl);
+    // console.log('Fetching from:', apiUrl);
 
     const username = process.env.NEXT_PUBLIC_HALAL_BOOKING_PARTNER_CODE;
     const password = process.env.NEXT_PUBLIC_HALAL_BOOKING_SECRET_KEY;
@@ -86,6 +86,9 @@ export default async function handler(
     }
 
     const apiData: HalalBookingResponse = await response.json();
+
+    // console.log({apiData: apiData.groups[0]?.offers.length});
+    
 
     // Fiyatları işle ve indirim uygula
     const processedOffers = processOffers(
@@ -155,10 +158,11 @@ function processOffers(
         const originalPrice = offer.total_price || offer.price || 0;
         const discountAmount = (originalPrice * discountPercentage) / 100;
         const discountedPrice = originalPrice - discountAmount;
-        // console.log(JSON.stringify(offer.room?.photos, null, 2));
+        const {quantity} = offer
+        // console.log(JSON.stringify(offer.room, null, 2));
 
         processedOffers.push({
-          roomName: offer.room?.name || 'Bilinmeyen Oda',
+          roomName: `${quantity > 1 ? `${quantity} x ` : ''}${offer.room?.name}` || 'Bilinmeyen Oda',
           roomId: offer.room?.id || 0,
           mealPlan: offer.rate_plan?.meal_plan_name || 'Bilinmiyor',
           originalPrice,
@@ -170,6 +174,7 @@ function processOffers(
           currency,
           cancellationPolicy: offer.rate_plan?.cancellation_policy_label || 'Bilinmiyor',
           image: offer.room?.photos[0] || offer.room?.photo || '',
+          quantity
         });
       });
     }

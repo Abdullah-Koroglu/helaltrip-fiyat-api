@@ -104,6 +104,7 @@ export interface ProcessedOffer {
   currency: string;
   cancellationPolicy: string;
   image: string;
+  quantity: number
 }
 
 export interface HotelPriceResponse {
