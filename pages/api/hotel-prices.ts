@@ -174,7 +174,8 @@ function processOffers(
           currency,
           cancellationPolicy: offer.rate_plan?.cancellation_policy_label || 'Bilinmiyor',
           image: offer.room?.photos[0] || offer.room?.photo || '',
-          quantity
+          quantity,
+          photos: offer.room?.photos 
         });
       });
     }
