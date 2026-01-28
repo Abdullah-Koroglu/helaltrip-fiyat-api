@@ -23,7 +23,8 @@ export default async function handler(
       childrenAges = [],
       discountPercentage = 0,
       currency = 'TRY',
-      customerCountryCode = 'TR'
+      customerCountryCode = 'TR',
+      locale= 'tr'
     }: HotelSearchRequest = req.body;
 
     // console.log(JSON.stringify({
@@ -63,7 +64,7 @@ export default async function handler(
     const totalGuests = [adults, ...childrenAges];
     
     // API URL'ini oluştur
-    const apiUrl = buildApiUrl(hotelId, checkin, checkout, totalGuests?.filter((age): age is number => age !== null && age !== undefined), currency, customerCountryCode);
+    const apiUrl = buildApiUrl(hotelId, checkin, checkout, totalGuests?.filter((age): age is number => age !== null && age !== undefined), currency, customerCountryCode, locale || 'tr');
     
     // console.log('Fetching from:', apiUrl);
 
@@ -129,9 +130,10 @@ function buildApiUrl(
   checkout: string,
   totalGuests: number[],
   currency: string,
-  customerCountryCode?: string
+  customerCountryCode?: string,
+  locale?: string
 ): string {
-  const baseUrl = `https://tr.halalbooking.com/api/v2/tr/places/${hotelId}/`;
+  const baseUrl = `https://${locale || 'tr'}.halalbooking.com/api/v2/${locale || 'tr'}/places/${hotelId}/`;
   const params = new URLSearchParams({
     'groups[]': totalGuests.join(','),
     'location': 'Turkey',

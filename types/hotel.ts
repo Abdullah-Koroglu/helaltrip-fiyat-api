@@ -8,6 +8,7 @@ export interface HotelSearchRequest {
   discountPercentage?: number;
   currency?: string;
   customerCountryCode?: string;
+  locale?: string
 }
 
 export interface Room {
